@@ -1,0 +1,61 @@
+package rr_lpd10_diccionario;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.Scanner;
+
+public class main {
+
+    public static void main(String[] args) {
+        Map<String, String> diccionario = new HashMap<>();
+       
+        diccionario.put("pajaro", "bird");
+        diccionario.put("cerveza", "beer");
+        diccionario.put("cumpleaños", "birthday");
+        diccionario.put("libro", "book");
+        diccionario.put("tierra", "earth");
+        diccionario.put("ciudad", "city");
+        diccionario.put("piña", "pineapple");
+        diccionario.put("pastel", "cake");
+        diccionario.put("pluma", "pen");
+        diccionario.put("cuero", "leather");
+        diccionario.put("vidrio", "glass");
+        diccionario.put("ficcion", "fiction");
+        diccionario.put("motosierra", "chainsaw");
+        diccionario.put("raton", "mouse");
+        diccionario.put("espejo", "mirror");
+        diccionario.put("jarabe", "siroup");
+        diccionario.put("escudo", "shield");
+        diccionario.put("celular", "cell phone");
+        diccionario.put("gato", "cat");
+        diccionario.put("perro", "dog");
+        
+        String[] palabrasAleatorias = seleccionarPalabrasAleatorias(diccionario, 5);
+        Scanner scanner = new Scanner(System.in);
+        int respuestasCorrectas = 0;
+        int respuestasIncorrectas = 0;
+        for (String palabra : palabrasAleatorias) {
+            System.out.print("Traduce '" + palabra + "' al inglés: ");
+            String respuesta = scanner.nextLine().trim().toLowerCase();
+            if (diccionario.containsKey(palabra) && diccionario.get(palabra).equalsIgnoreCase(respuesta)) {
+                System.out.println("¡Correcto!");
+                respuestasCorrectas++;
+            } else {
+                System.out.println("Incorrecto. La traducción correcta es '" + diccionario.get(palabra) + "'.");
+                respuestasIncorrectas++;
+            }
+        }
+        System.out.println("\nRespuestas correctas: " + respuestasCorrectas);
+        System.out.println("Respuestas incorrectas: " + respuestasIncorrectas);
+    }
+    private static String[] seleccionarPalabrasAleatorias(Map<String, String> diccionario, int cantidad) {
+        String[] palabras = diccionario.keySet().toArray(new String[0]);
+        Random random = new Random();
+        String[] palabrasAleatorias = new String[cantidad];
+        for (int i = 0; i < cantidad; i++) {
+            palabrasAleatorias[i] = palabras[random.nextInt(palabras.length)];
+        }
+        return palabrasAleatorias;
+    }
+}
